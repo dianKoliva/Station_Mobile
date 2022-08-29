@@ -8,11 +8,15 @@ import {
 import React, { useState } from "react";
 import { StatusBar } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
+import { signin } from "../functions/requests";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [clicked, setClicked] = useState("");
+  let validate = () => {
+    let valid = signin(name, password);
+  };
   return (
     <View className="h-full" style={{ backgroundColor: "white" }}>
       <StatusBar
@@ -59,7 +63,9 @@ const Login = () => {
         />
 
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            validate();
+          }}
           className="h-16 ml-4 mr-4 p-4 mt-8 rounded-lg "
           style={{
             backgroundColor: "#2941CA",
