@@ -16,7 +16,7 @@ const Gros = () => {
         style={{ backgroundColor:"#F5F6F9"}}
         // onChangeText={pass=>setPassword(pass)}
         value=""
-        placeholder="Produit"
+        placeholder="Nom"
    
       />
  <TextInput
@@ -24,10 +24,18 @@ const Gros = () => {
         style={{ backgroundColor:"#F5F6F9"}}
         // onChangeText={pass=>setPassword(pass)}
         value=""
-        placeholder="plaque"
+        placeholder="Numéro de téléphone"
    
       />
-      <View style={{flexDirection:"row"}}>
+ <TextInput
+    className="h-14  ml-4 mr-4 p-4 mt-4 rounded-lg" 
+        style={{ backgroundColor:"#F5F6F9"}}
+        // onChangeText={pass=>setPassword(pass)}
+        value=""
+        placeholder="Produit"
+   
+      />
+      <View style={{flexDirection:"row"}} className="mr-4">
                 <TextInput
                 className="h-14 w-7/12 ml-4 mr-4 p-4 mt-4 rounded-lg" 
                     style={{ backgroundColor:"#F5F6F9"}}
@@ -37,7 +45,7 @@ const Gros = () => {
             
                 />
                 <TextInput
-                className="h-14    p-4 mt-4 rounded-lg" 
+                className="h-14 w-4/12     p-4 mt-4 rounded-lg" 
                     style={{ backgroundColor:"#F5F6F9"}}
                     // onChangeText={pass=>setPassword(pass)}
                     value=""
