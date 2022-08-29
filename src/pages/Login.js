@@ -2,11 +2,16 @@ import { StyleSheet, Text, View,TextInput,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { StatusBar } from 'react-native'
 import { Fontisto } from '@expo/vector-icons'; 
+import {signin} from "../functions/requests"
 
 const Login = () => {
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
   const [clicked,setClicked]=useState("");
+  let validate=()=>{
+   let valid =signin(name,password);
+
+  }
   return (
     <View className="h-full" style={{backgroundColor:"white"}}>
          <StatusBar barStyle="dark-content" backgroundColor ="white"  translucent = {false}/>
@@ -43,7 +48,7 @@ const Login = () => {
    
       />
 
-      <TouchableOpacity onPress={()=>{} } className="h-16 ml-4 mr-4 p-4 mt-8 rounded-lg " style={{backgroundColor:"#2941CA",alignItems:"center",alignContent:"center"}}>
+      <TouchableOpacity onPress={()=>{validate()} } className="h-16 ml-4 mr-4 p-4 mt-8 rounded-lg " style={{backgroundColor:"#2941CA",alignItems:"center",alignContent:"center"}}>
 
 <Text className="mt-2 text-white ">Connexion</Text>
 
