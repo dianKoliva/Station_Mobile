@@ -1,15 +1,18 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from '../pages/Login';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "../pages/Login";
 
 const AuthStack = () => {
-    const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator >
-    <Stack.Screen name="Login" component={Login} />
-  </Stack.Navigator>
-  )
-}
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 
-export default AuthStack
+export default AuthStack;
