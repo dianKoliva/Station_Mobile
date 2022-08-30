@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { StatusBar } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { signin } from "../functions/requests";
+import { fonts } from "../utils/fonts";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ const Login = () => {
     let valid = signin(name, password);
   };
   return (
-    <View className="h-full" style={{ backgroundColor: "white" }}>
+    <View className="h-full px-2" style={{ backgroundColor: "white" }}>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
@@ -26,7 +27,7 @@ const Login = () => {
       />
 
       <View
-        className="flex mt-10"
+        className="flex mt-32"
         style={{
           flexDirection: "row",
           alignItems: "center",
@@ -40,23 +41,31 @@ const Login = () => {
       </View>
 
       <View className="mt-28" style={{ alignItems: "center" }}>
-        <Text className="text-5xl font-bold" style={{ color: "#2941CA" }}>
+        <Text
+          className="text-5xl font-bold"
+          style={{ color: "#2941CA", fontFamily: "Poppins_600SemiBold" }}
+        >
           Salut !
         </Text>
-        <Text style={{ color: "#888888" }}>Bienvenue à nouveau</Text>
+        <Text
+          style={[{ color: "#888888" }, fonts.dmSansRegular]}
+          className="text-lg"
+        >
+          Bienvenue à nouveau
+        </Text>
       </View>
 
       <View className="mt-4">
         <TextInput
           className="h-16  ml-4 mr-4 p-4 mt-8 rounded-lg"
-          style={{ backgroundColor: "#F5F6F9" }}
+          style={[{ backgroundColor: "#F5F6F9" }, fonts.dmSansRegular]}
           onChangeText={(name) => setName(name)}
           value={name}
           placeholder="Numéro de téléphone"
         />
         <TextInput
           className="h-16  ml-4 mr-4 p-4 mt-8 rounded-lg"
-          style={{ backgroundColor: "#F5F6F9" }}
+          style={[{ backgroundColor: "#F5F6F9" }, fonts.dmSansRegular]}
           onChangeText={(pass) => setPassword(pass)}
           value={password}
           placeholder="Mot de passe"
@@ -73,7 +82,9 @@ const Login = () => {
             alignContent: "center",
           }}
         >
-          <Text className="mt-2 text-white ">Connexion</Text>
+          <Text className="text-white text-lg " style={fonts.dmSansMedium}>
+            Connexion
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
