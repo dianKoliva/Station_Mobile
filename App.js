@@ -1,23 +1,30 @@
-// import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View ,SafeAreaView} from 'react-native';
-import { TailwindProvider } from 'tailwindcss-react-native';
-import UsageStack from './src/navigation/UsageStack';
-import { NavigationContainer } from '@react-navigation/native';
- import AuthStack from "./src/navigation/AuthStack"
-// import { AppContext } from './src/context/context';
-import { useState } from 'react';
-
+import { Provider } from "react-redux";
+import Main from "./src/Main";
+import store from "./src/store";
+import AppLoading from "expo-app-loading";
+import {
+  useFonts,
+  DMSans_400Regular,
+  DMSans_700Bold,
+  DMSans_500Medium,
+} from "@expo-google-fonts/dm-sans";
+import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
 
 export default function App() {
-  // const [auth,setAuth]=useState("");
-  return (
-    <NavigationContainer>
-    <TailwindProvider>
-     
+  let [fontsLoaded] = useFonts({
+    DMSans_400Regular,
+    DMSans_700Bold,
+    DMSans_500Medium,
+    Poppins_600SemiBold,
+  });
 
-  <AuthStack></AuthStack>
-    </TailwindProvider>
-    </NavigationContainer>
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <Provider store={store}>
+        <Main />
+      </Provider>
+    );
+  }
 }
-
