@@ -4,17 +4,20 @@ import {
   TouchableOpacity,
   View,
   Pressable,
+  Image,
 } from "react-native";
 import { StatusBar } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { logout } from "../store/reducers";
 import { fonts } from "../utils/fonts";
+import { Entypo } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
 const Choice = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <View className="bg-white flex-1 pt-20">
@@ -31,10 +34,11 @@ const Choice = () => {
           alignSelf: "center",
         }}
       >
-        <Fontisto name="blood-drop" size={54} color="#2941CA" />
-        <Text className="ml-3  font-bold text-2xl" style={{ color: "#2941CA" }}>
+        {/* <Fontisto name="blood-drop" size={54} color="#2941CA" />
+        <Text className="ml-3 font-bold text-2xl" style={{ color: "#2941CA" }}>
           Petro
-        </Text>
+        </Text> */}
+        <Image source={require("../images/logo.png")} />
       </View>
 
       <View className="mt-16">
@@ -47,10 +51,10 @@ const Choice = () => {
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Detail")}
-            style={{ backgroundColor: "#2941CA" }}
-            className="py-2.5 px-3.5 mt-1 rounded-lg ml-4"
+            style={{ backgroundColor: "#2941CA", borderRadius: 10 }}
+            className="py-3 px-3.5 mt-1 ml-4 flex justify-center items-center"
           >
-            <AntDesign name="right" size={18} color="white" />
+            <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
         </Pressable>
         <Pressable
@@ -62,10 +66,10 @@ const Choice = () => {
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Gros")}
-            style={{ backgroundColor: "#2941CA" }}
-            className="py-2.5 px-3.5 mt-1 rounded-lg ml-4"
+            style={{ backgroundColor: "#2941CA", borderRadius: 10 }}
+            className="py-3 px-3.5 mt-1 ml-4 flex justify-center items-center"
           >
-            <AntDesign name="right" size={18} color="white" />
+            <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
         </Pressable>
         <Pressable
@@ -76,11 +80,11 @@ const Choice = () => {
             Se déconnecter
           </Text>
           <TouchableOpacity
-            style={{ backgroundColor: "#2941CA" }}
-            className="py-2.5 px-3.5 mt-1 rounded-lg ml-4"
-            onPress={() => logout()}
+            onPress={() => dispatch(logout())}
+            style={{ backgroundColor: "#2941CA", borderRadius: 10 }}
+            className="py-3 px-3.5 mt-1 ml-4 flex justify-center items-center"
           >
-            <AntDesign name="right" size={18} color="white" />
+            <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
         </Pressable>
       </View>
