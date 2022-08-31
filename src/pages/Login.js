@@ -4,10 +4,10 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "react-native";
-import { Fontisto } from "@expo/vector-icons";
 import { signin } from "../functions/requests";
 import { fonts } from "../utils/fonts";
 
@@ -34,13 +34,10 @@ const Login = () => {
           alignSelf: "center",
         }}
       >
-        <Fontisto name="blood-drop" size={54} color="#2941CA" />
-        <Text className="ml-3  font-bold text-2xl" style={{ color: "#2941CA" }}>
-          Petro
-        </Text>
+        <Image source={require("../images/logo.png")} />
       </View>
 
-      <View className="mt-28" style={{ alignItems: "center" }}>
+      <View className="mt-24" style={{ alignItems: "center" }}>
         <Text
           className="text-5xl font-bold"
           style={{ color: "#2941CA", fontFamily: "Poppins_600SemiBold" }}

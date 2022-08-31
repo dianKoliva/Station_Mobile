@@ -28,7 +28,7 @@ export default function Main() {
   return (
     <NavigationContainer>
       <TailwindProvider>
-        {!isAuth ? <AuthStack /> : <UsageStack />}
+        {isAuth ? <AuthStack /> : <UsageStack />}
       </TailwindProvider>
     </NavigationContainer>
   );
