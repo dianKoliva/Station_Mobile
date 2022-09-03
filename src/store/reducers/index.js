@@ -4,7 +4,7 @@ export const appSlice = createSlice({
   name: "app",
   initialState: {
     token: null,
-    user: {},
+    user: null,
     isAuth: false,
   },
   reducers: {
@@ -15,8 +15,8 @@ export const appSlice = createSlice({
     },
     logout: (state) => {
       state.token = null;
-      state.user = {};
-      state.isAuth = null;
+      state.user = null;
+      state.isAuth = false;
     },
   },
 });

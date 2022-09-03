@@ -5,21 +5,29 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "react-native";
-import { signin } from "../functions/requests";
+import { signIn } from "../functions/requests";
 import { fonts } from "../utils/fonts";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../store/reducers";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [clicked, setClicked] = useState("");
-  let validate = () => {
-    let valid = signin(name, password);
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    signIn(name, password)
+      .then((res) => {
+        dispatch(authenticate({ token: res.token, user: res.user }));
+      })
+      .catch((err) => console.log(err));
   };
   return (
-    <View className="h-full px-2" style={{ backgroundColor: "white" }}>
+    <ScrollView className="h-full px-2" style={{ backgroundColor: "white" }}>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
@@ -61,7 +69,7 @@ const Login = () => {
           placeholder="Numéro de téléphone"
         />
         <TextInput
-          className="h-16  ml-4 mr-4 p-4 mt-8 rounded-lg"
+          className="h-16  ml-4 mr-4 p-4 mt-4 rounded-lg"
           style={[{ backgroundColor: "#F5F6F9" }, fonts.dmSansRegular]}
           onChangeText={(pass) => setPassword(pass)}
           value={password}
@@ -69,10 +77,8 @@ const Login = () => {
         />
 
         <TouchableOpacity
-          onPress={() => {
-            validate();
-          }}
-          className="h-16 ml-4 mr-4 p-4 mt-8 rounded-lg "
+          onPress={handleLogin}
+          className="h-16 ml-4 mr-4 p-4 mt-8 mb-4 rounded-lg "
           style={{
             backgroundColor: "#2941CA",
             alignItems: "center",
@@ -84,7 +90,7 @@ const Login = () => {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
