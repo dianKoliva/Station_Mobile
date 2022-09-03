@@ -5,6 +5,7 @@ import {
   View,
   Pressable,
   Image,
+  ScrollView,
 } from "react-native";
 import { StatusBar } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
@@ -20,14 +21,14 @@ const Choice = () => {
   const dispatch = useDispatch();
 
   return (
-    <View className="bg-white flex-1 pt-20">
+    <ScrollView className="bg-white flex-1 pt-20">
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
         translucent={false}
       />
       <View
-        className="flex mt-12"
+        className="flex"
         style={{
           flexDirection: "row",
           alignItems: "center",
@@ -41,7 +42,7 @@ const Choice = () => {
         <Image source={require("../images/logo.png")} />
       </View>
 
-      <View className="mt-16">
+      <View className="mt-10">
         <Pressable
           className="flex flex-row mx-8 mt-10 px-8 py-6 rounded-lg shadow-xl justify-between items-center"
           style={{ shadowColor: "#171717", elevation: 5 }}
@@ -88,7 +89,7 @@ const Choice = () => {
           </TouchableOpacity>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
