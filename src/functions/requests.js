@@ -17,7 +17,6 @@ export const signIn = async (name, pass) => {
     "http://63.142.252.251//petrol-station/web/index.php/api/v1/accounts/login",
     { username: name, password: pass }
   );
-  //   getTanks();
   return response.data;
 };
 

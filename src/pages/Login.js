@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Dimensions
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "react-native";
@@ -18,6 +19,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const {height,weight}=Dimensions.get("window");
 
   const handleLogin = () => {
     signIn(name, password)
