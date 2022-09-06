@@ -1,16 +1,13 @@
 import axios from "axios";
-let token;
-exports.getproducts = () => {
-  axios
-    .get(
-      `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/products?access-token=${token}`
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+
+exports.getproducts =async (token) => {
+
+  const response = await axios.post(
+    `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/products?access-token=${token}`
+  );
+  return response.data;
+  
+ 
 };
 export const signIn = async (name, pass) => {
   const response = await axios.post(
@@ -36,7 +33,7 @@ export const getTanks = async (accessToken) => {
 
 export const saveRetail = async (accessToken, data) => {
   const response = await axios.post(
-    `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/detail?access-token=${accessToken}`,
+    `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/retails?access-token=${accessToken}`,
     data
   );
   return response.data;
