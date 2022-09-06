@@ -49,7 +49,7 @@ const Detail = () => {
       cdf: "0",
       tank: parseInt(tank),
     };
-    console.log(data);
+  
     saveRetail(token, data)
       .then((res) => {
         Alert.alert(

@@ -7,10 +7,10 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar ,Alert} from "react-native";
 import { fonts } from "../utils/fonts";
 import BackButton from "../navigation/BackButton";
-import { getTanks, saveRetail } from "../functions/requests";
+import { getTanks, saveRetail ,getStations,getproducts, saveGros} from "../functions/requests";
 import RNPickerSelect from "react-native-picker-select/src";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -26,28 +26,39 @@ const Gros = () => {
   const [plaque, setPlaque] = useState("");
   const [devise, setDevise] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [usd, setUsd] = useState("");
-  const [fc, setFc] = useState("");
+  const [usd, setUsd] = useState(0);
+  const [fc, setFc] = useState(0);
   const [tank, setTank] = useState("");
+  const [stations,setStations]=useState([]);
+  const [station,setStation]=useState("");
+
+  const [nom,setNom]=useState("");
+  const [tel,setTel]=useState("");
+  const [products,setProducts]=useState([]);
+  const [currency,setCurrency]=useState([{label:"USD",value:"USD"},{label:"FRC",value:"FRC"}]);
+ 
 
   const enregistrer = () => {
     let data = {
+      nom_client:nom,
+      telephone:tel,
       user,
-      station: 1,
+      station,
       plaque,
-      product,
+      produit:product,
       quantite: quantity,
       prix: price,
       currency: devise,
       usd,
-      cdf: fc,
+      cdf: "0",
       tank: parseInt(tank),
     };
-    saveRetail(token, data)
+    console.log(data);
+    saveGros(token, data)
       .then((res) => {
         Alert.alert(
           "Station",
-          "Detail saved!",
+          "Gros saved!",
           [
             {
               text: "OK",
@@ -60,6 +71,7 @@ const Gros = () => {
       .catch((err) => console.log(err));
   };
 
+  
   useEffect(() => {
     getTanks(token)
       .then((res) => {
@@ -70,16 +82,37 @@ const Gros = () => {
         setTanks(__tanks);
       })
       .catch((err) => console.log(err));
+
+      getStations(token)
+      .then((res) => {
+        let __Stations = res.map((st) => {
+          let obj = { label: st.nom, value: st.id };
+          return obj;
+        });
+        setStations(__Stations);
+      })
+      .catch((err) => console.log(err));
+
+      getproducts(token)
+   .then((res) => {
+    let __prod = res.map((p) => {
+      let obj = { label: p.nom, value: p.id };
+      return obj;
+    });
+    setProducts(__prod);
+  })
+  .catch((err) => console.log(err));
+      
   }, []);
 
   return (
     <ScrollView className="bg-white flex-1 px-1">
-      <BackButton />
+      <  BackButton />
       <Text
         className="ml-4 text-2xl "
         style={[fonts.dmSansBold, { color: "#2941CA" }]}
       >
-        Gros
+      Gros
       </Text>
       <StatusBar
         barStyle="dark-content"
@@ -88,20 +121,28 @@ const Gros = () => {
       />
 
       <View>
-        <TextInput
+      <TextInput
           className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
           style={{ backgroundColor: "#F5F6F9" }}
-          value={product}
-          onChangeText={(text) => setProduct(text)}
-          placeholder="Produit"
+          value={nom}
+          onChangeText={(text) => setNom(text)}
+          placeholder="Nom_client"
         />
-        <TextInput
+           <TextInput
           className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
           style={{ backgroundColor: "#F5F6F9" }}
-          value={plaque}
-          onChangeText={(text) => setPlaque(text)}
-          placeholder="Plaque"
+          value={tel}
+          onChangeText={(text) => setTel(text)}
+          placeholder="Telephone"
         />
+      <RNPickerSelect
+            placeholder={{
+              label: "Produit",
+              value: null,
+            }}
+            onValueChange={(value) => setProduct(value)}
+            items={products}
+          />
         <View style={{ flexDirection: "row" }} className="mr-4">
           <TextInput
             className="h-14 w-7/12 ml-4 mr-4 p-4 mt-4 rounded"
@@ -111,14 +152,20 @@ const Gros = () => {
             placeholder="Prix"
             keyboardType="numeric"
           />
-          <TextInput
-            className="h-14 w-4/12     p-4 mt-4 rounded"
-            style={{ backgroundColor: "#F5F6F9" }}
-            value={devise}
-            onChangeText={(text) => setDevise(text)}
-            placeholder="Devise"
-          />
+        
+         
         </View>
+        <View>
+          <RNPickerSelect
+           style={{marginLeft:"2px"}}
+            placeholder={{
+              label: "Devise",
+              value: null,
+            }}
+            onValueChange={(value) => setDevise(value)}
+            items={currency}
+          />
+          </View>
         <TextInput
           className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
           style={{ backgroundColor: "#F5F6F9" }}
@@ -143,6 +190,16 @@ const Gros = () => {
           placeholder="FC"
           keyboardType="numeric"
         />
+         <View className="px-2"  style={{ backgroundColor: "#F5F6F9" }}>
+          <RNPickerSelect
+            placeholder={{
+              label: "Station",
+              value: null,
+            }}
+            onValueChange={(value) => setStation(value)}
+            items={stations}
+          />
+        </View>
         <View className="px-2">
           <RNPickerSelect
             placeholder={{
@@ -153,6 +210,7 @@ const Gros = () => {
             items={tanks}
           />
         </View>
+
 
         <TouchableOpacity
           onPress={enregistrer}
@@ -172,3 +230,5 @@ const Gros = () => {
 };
 
 export default Gros;
+
+const styles = StyleSheet.create({});
