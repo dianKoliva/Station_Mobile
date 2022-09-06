@@ -54,7 +54,20 @@ const Gros = () => {
       tank: parseInt(tank),
     };
     console.log(data);
-    saveGros(token, data)
+    if(plaque==""||quantity==""||prix==""||nom==""||tel==""){
+      Alert.alert(
+        "Station",
+        "No input should be left empty",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+    
+    }else{
+      saveGros(token, data)
       .then((res) => {
         Alert.alert(
           "Station",
@@ -69,6 +82,8 @@ const Gros = () => {
         );
       })
       .catch((err) => console.log(err));
+    }
+    
   };
 
   

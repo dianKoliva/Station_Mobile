@@ -1,5 +1,4 @@
 import axios from "axios";
-
 exports.getproducts =async (token) => {
 
   const response = await axios.post(

@@ -49,9 +49,23 @@ const Detail = () => {
       cdf: "0",
       tank: parseInt(tank),
     };
-  
-    saveRetail(token, data)
+    if(plaque==""||quantity==""||prix==""){
+      Alert.alert(
+        "Station",
+        "No input should be left empty",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+    
+    }
+    else{
+      saveRetail(token, data)
       .then((res) => {
+     
         Alert.alert(
           "Station",
           "Detail saved!",
@@ -65,6 +79,9 @@ const Detail = () => {
         );
       })
       .catch((err) => console.log(err));
+    }
+  
+    
   };
 
   useEffect(() => {

@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "react-native";
@@ -24,7 +25,22 @@ const Login = () => {
   const handleLogin = () => {
     signIn(name, password)
       .then((res) => {
-        dispatch(authenticate({ token: res.token, user: res.user }));
+        if(res.success){
+          dispatch(authenticate({ token: res.token, user: res.user }));
+        }
+        else{
+          Alert.alert(
+            "Station",
+            "Check your inputs",
+            [
+              {
+                text: "OK",
+              },
+            ],
+            { cancelable: false }
+          );
+        }
+      
       })
       .catch((err) => console.log(err));
   };
