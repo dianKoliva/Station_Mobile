@@ -118,7 +118,7 @@ const Detail = () => {
   }, []);
 
   return (
-    <ScrollView className="bg-white flex-1 " style={{paddingHorizontal:"5%"}}>
+    <ScrollView className="bg-white flex-1 " style={{paddingHorizontal:"5%",flex:1}}>
       <View  >
 <  BackButton  />
       </View>

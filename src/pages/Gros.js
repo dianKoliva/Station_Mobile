@@ -121,7 +121,9 @@ const Gros = () => {
   }, []);
 
   return (
-    <ScrollView className="bg-white flex-1 " style={{height:"100%",paddingHorizontal:"4%"}}>
+
+    <View style={{height:"100%"}}>
+    <ScrollView className="bg-white  " style={{paddingHorizontal:"4%",flex:1}}>
       <  BackButton />
       <Text
         className="ml-4 text-2xl "
@@ -257,7 +259,9 @@ const Gros = () => {
         </TouchableOpacity>
       </View>
       <View></View>
+      
     </ScrollView>
+    </View>
   );
 };
 
