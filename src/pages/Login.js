@@ -45,7 +45,7 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <ScrollView className="h-full px-2" style={{ backgroundColor: "white" }}>
+    <ScrollView className=" px-2" style={{ backgroundColor: "white",height:"100%" }}>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
@@ -53,17 +53,18 @@ const Login = () => {
       />
 
       <View
-        className="flex mt-32"
+        className="flex "
         style={{
           flexDirection: "row",
           alignItems: "center",
           alignSelf: "center",
+          marginTop:"25%"
         }}
       >
         <Image source={require("../images/logo.png")} />
       </View>
 
-      <View className="mt-24" style={{ alignItems: "center" }}>
+      <View className="" style={{ alignItems: "center" ,marginTop:"22%" }}>
         <Text
           className="text-5xl font-bold"
           style={{ color: "#2941CA", fontFamily: "Poppins_600SemiBold" }}
@@ -80,15 +81,15 @@ const Login = () => {
 
       <View className="mt-4">
         <TextInput
-          className="h-16  ml-4 mr-4 p-4 mt-8 rounded-lg"
-          style={[{ backgroundColor: "#F5F6F9" }, fonts.dmSansRegular]}
+          className="  p-4  rounded-lg"
+          style={[{ backgroundColor: "#F5F6F9",marginLeft:"4%" ,marginRight:"4%",height:"18%",marginTop:"10%"}, fonts.dmSansRegular]}
           onChangeText={(name) => setName(name)}
           value={name}
           placeholder="Numéro de téléphone"
         />
         <TextInput
-          className="h-16  ml-4 mr-4 p-4 mt-4 rounded-lg"
-          style={[{ backgroundColor: "#F5F6F9" }, fonts.dmSansRegular]}
+          className=" p-4  rounded-lg"
+          style={[{ backgroundColor: "#F5F6F9",marginLeft:"4%" ,marginRight:"4%",height:"18%",marginTop:"4%"}, fonts.dmSansRegular]}
           onChangeText={(pass) => setPassword(pass)}
           value={password}
           placeholder="Mot de passe"
@@ -96,14 +97,15 @@ const Login = () => {
 
         <TouchableOpacity
           onPress={handleLogin}
-          className="h-16 ml-4 mr-4 p-4 mt-8 mb-4 rounded-lg "
+          className=" p-4  mb-4 rounded-lg "
           style={{
             backgroundColor: "#2941CA",
+            marginLeft:"4%" ,marginRight:"4%",marginTop:"10%",
             alignItems: "center",
             alignContent: "center",
           }}
         >
-          <Text className="text-white text-lg " style={fonts.dmSansMedium}>
+          <Text className="text-white text-sm " style={fonts.dmSansMedium}>
             Connexion
           </Text>
         </TouchableOpacity>
