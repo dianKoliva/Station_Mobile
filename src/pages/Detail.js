@@ -118,11 +118,14 @@ const Detail = () => {
   }, []);
 
   return (
-    <ScrollView className="bg-white flex-1 px-1">
-      <  BackButton />
+    <ScrollView className="bg-white flex-1 " style={{paddingHorizontal:"5%"}}>
+      <View  >
+<  BackButton  />
+      </View>
+      
       <Text
-        className="ml-4 text-2xl "
-        style={[fonts.dmSansBold, { color: "#2941CA" }]}
+        className=" text-2xl "
+        style={[fonts.dmSansBold, { color: "#2941CA",marginLeft:"4%" }]}
       >
         Detail
       </Text>
@@ -133,7 +136,9 @@ const Detail = () => {
       />
 
       <View>
+      <View className="rounded" style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"0%",marginTop:"4%"}}>
       <RNPickerSelect
+     
             placeholder={{
               label: "Produit",
               value: null,
@@ -141,17 +146,19 @@ const Detail = () => {
             onValueChange={(value) => setProduct(value)}
             items={products}
           />
+      </View>
+     
         <TextInput
-          className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
-          style={{ backgroundColor: "#F5F6F9" }}
+          className=" rounded"
+          style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"2%",marginTop:"4%"}}
           value={plaque}
           onChangeText={(text) => setPlaque(text)}
           placeholder="Plaque"
         />
-        <View style={{ flexDirection: "row" }} className="mr-4">
+        
           <TextInput
-            className="h-14 w-7/12 ml-4 mr-4 p-4 mt-4 rounded"
-            style={{ backgroundColor: "#F5F6F9" }}
+            className="  rounded"
+            style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"2%",marginTop:"4%"}}
             value={price}
             onChangeText={(text) => setPrice(text)}
             placeholder="Prix"
@@ -166,10 +173,10 @@ const Detail = () => {
           /> */}
         
          
-        </View>
-        <View>
+     
+        <View  style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"0%",marginTop:"4%"}}>
           <RNPickerSelect
-           style={{marginLeft:"2px"}}
+           style={{marginLeft:"2%"}}
             placeholder={{
               label: "Devise",
               value: null,
@@ -179,30 +186,30 @@ const Detail = () => {
           />
           </View>
         <TextInput
-          className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
-          style={{ backgroundColor: "#F5F6F9" }}
+          className=" rounded"
+          style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"2%",marginTop:"4%"}}
           value={quantity}
           onChangeText={(text) => setQuantity(text)}
           placeholder="Quantité"
           keyboardType="numeric"
         />
         <TextInput
-          className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
-          style={{ backgroundColor: "#F5F6F9" }}
+          className=" rounded"
+          style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"2%",marginTop:"4%"}}
           value={usd}
           onChangeText={(text) => setUsd(text)}
           placeholder="USD"
           keyboardType="numeric"
         />
         <TextInput
-          className="h-14  ml-4 mr-4 p-4 mt-4 rounded"
-          style={{ backgroundColor: "#F5F6F9" }}
+          className=" rounded"
+          style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"2%",marginTop:"4%"}}
           value={fc}
           onChangeText={(text) => setFc(text)}
           placeholder="FC"
           keyboardType="numeric"
         />
-         <View className="px-2"  style={{ backgroundColor: "#F5F6F9" }}>
+         <View   style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"0%",marginTop:"4%"}}>
           <RNPickerSelect
             placeholder={{
               label: "Station",
@@ -212,7 +219,7 @@ const Detail = () => {
             items={stations}
           />
         </View>
-        <View className="px-2">
+        <View  style={{ backgroundColor: "#F5F6F9" ,height:"7%",marginLeft:"4%",marginRight:"4%",padding:"0%",marginTop:"4%"}}>
           <RNPickerSelect
             placeholder={{
               label: "Tank",
@@ -226,8 +233,9 @@ const Detail = () => {
 
         <TouchableOpacity
           onPress={enregistrer}
-          className="h-14 ml-4 mr-4 p-4 mt-6 rounded flex-row justify-center items-center mb-2"
+          className=" rounded flex-row justify-center items-center "
           style={{
+            height:"6%",marginLeft:"4%",marginRight:"4%",padding:"0%",marginTop:"4%",marginBottom:"2%",
             backgroundColor: "#2941CA",
           }}
         >

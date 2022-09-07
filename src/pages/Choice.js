@@ -21,7 +21,7 @@ const Choice = () => {
   const dispatch = useDispatch();
 
   return (
-    <ScrollView className="bg-white flex-1 pt-20">
+    <ScrollView className="bg-white flex-1 " style={{paddingTop:"20%"}}>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
@@ -42,48 +42,63 @@ const Choice = () => {
         <Image source={require("../images/logo.png")} />
       </View>
 
-      <View className="mt-10">
+      <View className="" style={{marginTop:"10%"}}>
         <Pressable
-          className="flex flex-row mx-8 mt-10 px-8 py-6 rounded-lg shadow-xl justify-between items-center"
-          style={{ shadowColor: "#171717", elevation: 5 }}
+         onPress={() => navigation.navigate("Detail")}
+          className="flex flex-row   rounded-lg shadow-xl justify-between items-center"
+          style={{
+            marginHorizontal:"8%" ,marginTop:"10%" ,paddingHorizontal:"8%",paddingVertical:"6%", shadowColor: "#171717", elevation: 5,marginHorizontal:"8%" ,marginTop:"10%" ,paddingHorizontal:"8%",paddingVertical:"6%"}}
         >
-          <Text className="mt-2 mr-14 text-lg" style={fonts.dmSansRegular}>
+          <Text className=" text-lg" style={[{marginTop:"2%",marginRight:"14%"},fonts.dmSansRegular]}>
             Vente au détail
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Detail")}
-            style={{ backgroundColor: "#2941CA", borderRadius: 10 }}
-            className="py-3 px-3.5 mt-1 ml-4 flex justify-center items-center"
+            style={{ 
+              paddingVertical:"4%",paddingHorizontal:"3.5%",marginTop:"1%",marginLeft:"4%",
+              backgroundColor: "#2941CA", borderRadius: 10 }}
+            className=" flex justify-center items-center"
           >
             <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
         </Pressable>
         <Pressable
-          className="flex flex-row mx-8 mt-6 px-8 py-6 rounded-lg shadow-xl justify-between items-center"
-          style={{ shadowColor: "#171717", elevation: 5 }}
+         onPress={() => navigation.navigate("Gros")}
+          className="flex flex-row  rounded-lg shadow-xl justify-between items-center"
+          style={{
+            marginHorizontal:"8%" ,marginTop:"10%" ,paddingHorizontal:"8%",paddingVertical:"6%",
+            shadowColor: "#171717", elevation: 5 }}
         >
-          <Text className="mt-2 mr-14 text-lg" style={fonts.dmSansRegular}>
+          <Text
+           className=" text-lg" style={[{marginTop:"2%",marginRight:"14%"},fonts.dmSansRegular]}>
             Vente au gros
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Gros")}
-            style={{ backgroundColor: "#2941CA", borderRadius: 10 }}
-            className="py-3 px-3.5 mt-1 ml-4 flex justify-center items-center"
+            style={{ 
+              paddingVertical:"4%",paddingHorizontal:"3.5%",marginTop:"1%",marginLeft:"4%",
+              backgroundColor: "#2941CA", borderRadius: 10 }}
+            className=" flex justify-center items-center"
           >
             <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
         </Pressable>
         <Pressable
-          className="flex flex-row mx-8 mt-6 px-8 py-6 rounded-lg shadow-xl justify-between items-center"
-          style={{ shadowColor: "#171717", elevation: 5 }}
+          className="flex flex-row  rounded-lg shadow-xl justify-between items-center"
+          style={{
+            marginHorizontal:"8%" ,marginTop:"10%" ,paddingHorizontal:"8%",paddingVertical:"6%",
+            shadowColor: "#171717", elevation: 5 }}
         >
-          <Text className="mt-2 mr-14 text-lg" style={fonts.dmSansRegular}>
+          <Text className=" text-lg" 
+          style={[{marginTop:"2%",marginRight:"14%"},fonts.dmSansRegular]}>
             Se déconnecter
           </Text>
           <TouchableOpacity
             onPress={() => dispatch(logout())}
-            style={{ backgroundColor: "#2941CA", borderRadius: 10 }}
-            className="py-3 px-3.5 mt-1 ml-4 flex justify-center items-center"
+            style={{ 
+              paddingVertical:"4%",paddingHorizontal:"3.5%",marginTop:"1%",marginLeft:"4%",
+              backgroundColor: "#2941CA", borderRadius: 10 }}
+            className=" flex justify-center items-center"
           >
             <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
