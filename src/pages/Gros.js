@@ -53,7 +53,6 @@ const Gros = () => {
       cdf: "0",
       tank: parseInt(tank),
     };
-    console.log(data);
     if(plaque==""||quantity==""||prix==""||nom==""||tel==""){
       Alert.alert(
         "Station",

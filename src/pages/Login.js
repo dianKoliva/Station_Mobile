@@ -31,7 +31,7 @@ const Login = () => {
         else{
           Alert.alert(
             "Station",
-            "Check your inputs",
+            "Invalid Credentials",
             [
               {
                 text: "OK",
@@ -45,7 +45,7 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <ScrollView className=" px-2" style={{ backgroundColor: "white",height:"100%" }}>
+    <ScrollView className=" px-2" style={{ backgroundColor: "white",height:"100%" ,flex:1}}>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
@@ -58,7 +58,7 @@ const Login = () => {
           flexDirection: "row",
           alignItems: "center",
           alignSelf: "center",
-          marginTop:"25%"
+          marginTop:"20%"
         }}
       >
         <Image source={require("../images/logo.png")} />
@@ -100,7 +100,7 @@ const Login = () => {
           className=" p-4  mb-4 rounded-lg "
           style={{
             backgroundColor: "#2941CA",
-            marginLeft:"4%" ,marginRight:"4%",marginTop:"10%",
+            marginLeft:"4%" ,marginRight:"4%",marginTop:"10%",marginBottom:"4%",
             alignItems: "center",
             alignContent: "center",
           }}
