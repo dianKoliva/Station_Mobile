@@ -35,10 +35,7 @@ const Choice = () => {
           alignSelf: "center",
         }}
       >
-        {/* <Fontisto name="blood-drop" size={54} color="#2941CA" />
-        <Text className="ml-3 font-bold text-2xl" style={{ color: "#2941CA" }}>
-          Petro
-        </Text> */}
+
         <Image source={require("../images/logo.png")} />
       </View>
 
