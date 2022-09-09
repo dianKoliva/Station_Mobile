@@ -35,7 +35,7 @@ const UsageStack = () => {
         name="Report"
         component={Report}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
     </Stack.Navigator>

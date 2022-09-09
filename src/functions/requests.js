@@ -18,7 +18,7 @@ exports.getPrice =async (token) => {
 
 exports.getReports =async (token) => {
 
-  const response = await axios.get(
+  const response = await axios.post(
     `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/report?access-token=${token}`,{
       start_date:"2022-08-01",
     end_date:"2022-09-09"
