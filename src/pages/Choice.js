@@ -83,6 +83,29 @@ const Choice = () => {
             <Entypo name="chevron-thin-right" size={18} color="white" />
           </TouchableOpacity>
         </Pressable>
+
+        <Pressable
+          className="flex flex-row  rounded-lg shadow-xl justify-between items-center"
+          style={{
+            marginHorizontal:"8%" ,marginTop:"10%" ,paddingHorizontal:"8%",paddingVertical:"6%",
+            shadowColor: "#171717", elevation: 5 }}
+        >
+          <Text className=" text-lg" 
+          style={[{marginTop:"2%",marginRight:"14%"},fonts.dmSansRegular]}>
+           Rapport
+          </Text>
+          
+          <TouchableOpacity
+            onPress={() => dispatch(logout())}
+            style={{ 
+              paddingVertical:"4%",paddingHorizontal:"3.5%",marginTop:"1%",marginLeft:"4%",
+              backgroundColor: "#2941CA", borderRadius: 10 }}
+            className=" flex justify-center items-center"
+          >
+            <Entypo name="chevron-thin-right" size={18} color="white" />
+          </TouchableOpacity>
+        </Pressable>
+
         <Pressable
           className="flex flex-row  rounded-lg shadow-xl justify-between items-center"
           style={{
@@ -93,6 +116,7 @@ const Choice = () => {
           style={[{marginTop:"2%",marginRight:"14%"},fonts.dmSansRegular]}>
             Se déconnecter
           </Text>
+          
           <TouchableOpacity
             onPress={() => dispatch(logout())}
             style={{ 

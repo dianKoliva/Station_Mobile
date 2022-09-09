@@ -53,7 +53,7 @@ const Gros = () => {
       cdf: "0",
       tank: parseInt(tank),
     };
-    if(plaque==""||quantity==""||prix==""||nom==""||tel==""){
+    if(plaque==""||quantity==""||price==""||nom==""||tel==""){
       Alert.alert(
         "Station",
         "No input should be left empty",

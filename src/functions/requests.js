@@ -8,6 +8,15 @@ exports.getproducts =async (token) => {
   
  
 };
+exports.getPrice =async (token) => {
+
+  const response = await axios.post(
+    `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/pricing?access-token=${token}`
+  );
+  return response.data;
+  
+ 
+};
 export const signIn = async (name, pass) => {
   const response = await axios.post(
     "http://63.142.252.251//petrol-station/web/index.php/api/v1/accounts/login",
