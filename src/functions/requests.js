@@ -1,7 +1,7 @@
 import axios from "axios";
 exports.getproducts =async (token) => {
 
-  const response = await axios.post(
+  const response = await axios.get(
     `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/products?access-token=${token}`
   );
   return response.data;
@@ -10,13 +10,23 @@ exports.getproducts =async (token) => {
 };
 exports.getPrice =async (token) => {
 
-  const response = await axios.post(
+  const response = await axios.get(
     `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/pricing?access-token=${token}`
   );
   return response.data;
-  
- 
 };
+
+exports.getReports =async (token) => {
+
+  const response = await axios.get(
+    `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/report?access-token=${token}`,{
+      start_date:"2022-08-01",
+    end_date:"2022-09-09"
+    }
+  );
+  return response.data;
+};
+
 export const signIn = async (name, pass) => {
   const response = await axios.post(
     "http://63.142.252.251//petrol-station/web/index.php/api/v1/accounts/login",
@@ -54,3 +64,4 @@ export const saveGros = async (accessToken, data) => {
   );
   return response.data;
 };
+

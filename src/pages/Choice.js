@@ -96,7 +96,7 @@ const Choice = () => {
           </Text>
           
           <TouchableOpacity
-            onPress={() => dispatch(logout())}
+          onPress={() => navigation.navigate("Report")}
             style={{ 
               paddingVertical:"4%",paddingHorizontal:"3.5%",marginTop:"1%",marginLeft:"4%",
               backgroundColor: "#2941CA", borderRadius: 10 }}

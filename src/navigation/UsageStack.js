@@ -2,6 +2,7 @@ import React from "react";
 import Detail from "../pages/Detail";
 import Gros from "../pages/Gros";
 import Choice from "../pages/Choice";
+import Report from "../pages/Report";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -26,6 +27,13 @@ const UsageStack = () => {
       <Stack.Screen
         name="Choice"
         component={Choice}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Report"
+        component={Report}
         options={{
           headerShown: false,
         }}
