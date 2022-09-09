@@ -1,7 +1,6 @@
 import { Provider } from "react-redux";
 import Main from "./src/Main";
 import store from "./src/store";
-import AppLoading from "expo-app-loading";
 import {
   useFonts,
   DMSans_400Regular,
@@ -9,6 +8,7 @@ import {
   DMSans_500Medium,
 } from "@expo-google-fonts/dm-sans";
 import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
+import { ActivityIndicator } from "react-native";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -19,7 +19,7 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <ActivityIndicator />;
   } else {
     return (
       <Provider store={store}>

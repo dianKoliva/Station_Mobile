@@ -4,7 +4,6 @@ import Gros from "../pages/Gros";
 import Choice from "../pages/Choice";
 import Report from "../pages/Report";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { AntDesign } from "@expo/vector-icons";
 
 const UsageStack = () => {
   const Stack = createNativeStackNavigator();
