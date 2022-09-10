@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,StatusBar} from 'react-native'
+import { StyleSheet, Text, View ,StatusBar,Button, TouchableOpacity} from 'react-native'
 import { DataTable } from 'react-native-paper';
 import BackButton from "../navigation/BackButton";
 import React from 'react'
@@ -6,6 +6,7 @@ import {  getReports} from "../functions/requests";
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from "react-redux";
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const Report = () => {
     const [report,setReport]=useState([]);
@@ -14,7 +15,6 @@ const Report = () => {
     useEffect(() => {
         getReports(token)
      .then((res) => {
-        console.log(res);
       let __prod = res.map((p) => {
         let obj = { name: p.name, littres: p.littres,usd:p.usd,fc:p.fc };
         return obj;
@@ -26,6 +26,38 @@ const Report = () => {
    
         
     }, []);
+
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [second,setSecond]=useState(false);
+
+    const showSecond=()=>{
+      setSecond(true);
+    }
+    const hideSecond=()=>{
+      setSecond(false);
+    }
+    const handleSec=(dt)=>{
+console.log(dt);
+hideSecond();
+    }
+
+
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    
+ 
+    let mine=date;
+    console.log(mine);
+    hideDatePicker();
+  };
   return (
     <View>
     
@@ -34,6 +66,35 @@ const Report = () => {
           backgroundColor="white"
           translucent={false}
         />
+
+        
+<View>
+
+  <TouchableOpacity onPress={showDatePicker} className="rounded-md"  style={{marginTop:"10%",marginHorizontal:"10%", backgroundColor: "#2941CA",alignItems:"center" ,paddingVertical:"3%"}}>
+    <Text className="text-white  ">Start date</Text>
+  </TouchableOpacity>
+    
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+    </View>
+<View>
+
+  <TouchableOpacity onPress={showSecond} className="rounded-md"  style={{marginTop:"10%",marginHorizontal:"10%", backgroundColor: "#2941CA",alignItems:"center" ,paddingVertical:"3%"}}>
+    <Text className="text-white  ">End date</Text>
+  </TouchableOpacity>
+    
+      <DateTimePickerModal
+        isVisible={second}
+        mode="date"
+        onConfirm={handleSec}
+        onCancel={hideSecond}
+      />
+    </View>
+
       
       <DataTable style={{marginTop:"50%",paddingHorizontal:"10%"}}>
         <DataTable.Header>
