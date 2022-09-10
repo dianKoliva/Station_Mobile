@@ -82,7 +82,7 @@ const Detail = () => {
 
     getPrice(token)
       .then((res) => {
-        console.log(res);
+       
         let __pri = res.map((p) => {
           let obj = { prod: p.produit, usd: p.usd, cdf: p.cdf };
           return obj;
@@ -101,13 +101,7 @@ const Detail = () => {
         backgroundColor="white"
         translucent={false}
       />
-      <BackButton />
-      <Text
-        className=" text-2xl "
-        style={[fonts.dmSansBold, { color: "#2941CA", marginLeft: "4%" }]}
-      >
-        Detail
-      </Text>
+    
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>Produit</DataTable.Title>

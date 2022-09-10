@@ -11,18 +11,11 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 const Report = () => {
     const [report,setReport]=useState([]);
     const { token, user } = useSelector((state) => state.app);
+   const [start,setStart]=useState("");
+   const [end,setEnd]=useState("")
 
     useEffect(() => {
-        getReports(token)
-     .then((res) => {
-      let __prod = res.map((p) => {
-        let obj = { name: p.name, littres: p.littres,usd:p.usd,fc:p.fc };
-        return obj;
-      });
-      setReport(__prod);
-    })
-    .catch((err) => console.log(err));
-        
+       
    
         
     }, []);
@@ -37,10 +30,25 @@ const Report = () => {
       setSecond(false);
     }
     const handleSec=(dt)=>{
-console.log(dt);
+      let d=dt.getFullYear()+'-' + (dt.getMonth()+1) + '-'+dt.getDate();
+setEnd(d);
 hideSecond();
+submit();
+
+   
     }
 
+    function submit(){
+      getReports(token,start,end)
+      .then((res) => {
+       let __prod = res.map((p) => {
+         let obj = { name: p.name, littres: p.littres,usd:p.usd,fc:p.fc };
+         return obj;
+       });
+       setReport(__prod);
+      })
+      .catch((err) => console.log(err));
+    }
 
 
   const showDatePicker = () => {
@@ -53,9 +61,8 @@ hideSecond();
 
   const handleConfirm = (date) => {
     
- 
-    let mine=date;
-    console.log(mine);
+    let d=date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
+  setStart(d);
     hideDatePicker();
   };
   return (
@@ -70,7 +77,7 @@ hideSecond();
         
 <View>
 
-  <TouchableOpacity onPress={showDatePicker} className="rounded-md"  style={{marginTop:"10%",marginHorizontal:"10%", backgroundColor: "#2941CA",alignItems:"center" ,paddingVertical:"3%"}}>
+  <TouchableOpacity onPress={showDatePicker} className="rounded-md"  style={{marginTop:"40%",marginHorizontal:"10%", backgroundColor: "#2941CA",alignItems:"center" ,paddingVertical:"3%"}}>
     <Text className="text-white  ">Start date</Text>
   </TouchableOpacity>
     
@@ -96,7 +103,7 @@ hideSecond();
     </View>
 
       
-      <DataTable style={{marginTop:"50%",paddingHorizontal:"10%"}}>
+      <DataTable style={{marginTop:"30%",paddingHorizontal:"10%"}}>
         <DataTable.Header>
           <DataTable.Title>Name</DataTable.Title>
           <DataTable.Title >Littres</DataTable.Title>

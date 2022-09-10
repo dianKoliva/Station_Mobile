@@ -13,14 +13,14 @@ const UsageStack = () => {
         name="Detail"
         component={Detail}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
         name="Gros"
         component={Gros}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
