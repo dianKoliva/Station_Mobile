@@ -5,6 +5,7 @@ import {
   StatusBar,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -25,8 +26,9 @@ const Gros = () => {
   const [usd, setUsd] = useState(0);
   const [fc, setFc] = useState(0);
   const [ibiciro, setIbiciro] = useState([]);
-  const [nom,setNom]=useState("");
-  const [tel,setTel]=useState("")
+  const [nom, setNom] = useState("");
+  const [tel, setTel] = useState("");
+  const [devise, setDevise] = useState("USD");
 
   const { token, user } = useSelector((state) => state.app);
 
@@ -84,7 +86,6 @@ const Gros = () => {
 
     getPrice(token)
       .then((res) => {
-    
         let __pri = res.map((p) => {
           let obj = { prod: p.produit, usd: p.usd, cdf: p.cdf };
           return obj;
@@ -94,16 +95,16 @@ const Gros = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <View
-      className="bg-white flex-1 "
-      style={{ paddingHorizontal: "5%", flex: 1 }}
+    <ScrollView
+      className="bg-white flex-1"
+      contentContainerStyle={{ paddingBottom: 80, paddingHorizontal: "5%" }}
     >
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
         translucent={false}
       />
-    
+
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>Produit</DataTable.Title>
@@ -120,6 +121,25 @@ const Gros = () => {
           );
         })}
       </DataTable>
+      <View
+        className="rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 50,
+          marginLeft: "4%",
+          marginRight: "4%",
+          marginTop: "4%",
+        }}
+      >
+        <RNPickerSelect
+          placeholder={{
+            label: "Product",
+            value: null,
+          }}
+          onValueChange={(value) => setProduct(value)}
+          items={products}
+        />
+      </View>
       <TextInput
         className=" rounded"
         style={{
@@ -134,7 +154,7 @@ const Gros = () => {
         onChangeText={(text) => setNom(text)}
         placeholder="Nom du client"
       />
-       <TextInput
+      <TextInput
         className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
@@ -177,6 +197,28 @@ const Gros = () => {
         placeholder="Prix"
         keyboardType="numeric"
       />
+      <View
+        className="rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 50,
+          marginLeft: "4%",
+          marginRight: "4%",
+          marginTop: "4%",
+        }}
+      >
+        <RNPickerSelect
+          placeholder={{
+            label: "Devise",
+            value: null,
+          }}
+          onValueChange={(value) => setDevise(value)}
+          items={[
+            { label: "USD", value: "USD" },
+            { label: "FC", value: "FC" },
+          ]}
+        />
+      </View>
       <TextInput
         className=" rounded"
         style={{
@@ -240,7 +282,7 @@ const Gros = () => {
           Enregistrer
         </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
