@@ -1,27 +1,23 @@
 import axios from "axios";
-exports.getproducts =async (token) => {
-
+exports.getproducts = async (token) => {
   const response = await axios.get(
     `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/products?access-token=${token}`
   );
   return response.data;
-  
- 
 };
-exports.getPrice =async (token) => {
-
+exports.getPrice = async (token) => {
   const response = await axios.get(
     `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/pricing?access-token=${token}`
   );
   return response.data;
 };
 
-exports.getReports =async (token,start,ending) => {
-
+exports.getReports = async (token, start, ending) => {
   const response = await axios.post(
-    `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/report?access-token=${token}`,{
-      start_date:start,
-    end_date:ending
+    `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/report?access-token=${token}`,
+    {
+      start_date: start,
+      end_date: ending,
     }
   );
   return response.data;
@@ -35,7 +31,7 @@ export const signIn = async (name, pass) => {
   return response.data;
 };
 
-export const getStations = async (accessToken) => {
+export const getModes = async (accessToken) => {
   const response = await axios.get(
     `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/stations?access-token=${accessToken}`
   );
@@ -64,4 +60,3 @@ export const saveGros = async (accessToken, data) => {
   );
   return response.data;
 };
-

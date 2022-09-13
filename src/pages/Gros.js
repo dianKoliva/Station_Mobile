@@ -1,36 +1,35 @@
 import {
-  StyleSheet,
   Text,
   View,
   StatusBar,
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fonts } from "../utils/fonts";
-import BackButton from "../navigation/BackButton";
 import RNPickerSelect from "react-native-picker-select/src";
 import { DataTable } from "react-native-paper";
-import { saveRetail, getproducts, getPrice } from "../functions/requests";
+import { saveRetail } from "../functions/requests";
 import { useSelector } from "react-redux";
 
-const Gros = () => {
-  const [hey, setHey] = useState("hello");
+const Gros = ({ navigation }) => {
   const [plaque, setPlaque] = useState("");
   const [price, setPrice] = useState("");
-  const [products, setProducts] = useState([]);
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState("");
   const [usd, setUsd] = useState(0);
   const [fc, setFc] = useState(0);
-  const [ibiciro, setIbiciro] = useState([]);
   const [nom, setNom] = useState("");
   const [tel, setTel] = useState("");
   const [devise, setDevise] = useState("USD");
+  const [mode, setMode] = useState([]);
 
-  const { token, user } = useSelector((state) => state.app);
+  const { token, user, prices, products, modes } = useSelector(
+    (state) => state.app
+  );
 
   const enregistrer = () => {
     let data = {
@@ -42,6 +41,7 @@ const Gros = () => {
       currency: devise,
       usd,
       cdf: "0",
+      payment_mode: mode,
     };
     if (plaque == "" || quantity == "" || price == "") {
       Alert.alert(
@@ -59,7 +59,7 @@ const Gros = () => {
         .then((res) => {
           Alert.alert(
             "Station",
-            "Detail saved!",
+            "Enregistré!",
             [
               {
                 text: "OK",
@@ -73,31 +73,10 @@ const Gros = () => {
     }
   };
 
-  useEffect(() => {
-    getproducts(token)
-      .then((res) => {
-        let __prod = res.map((p) => {
-          let obj = { label: p.nom, value: p.id };
-          return obj;
-        });
-        setProducts(__prod);
-      })
-      .catch((err) => console.log(err));
-
-    getPrice(token)
-      .then((res) => {
-        let __pri = res.map((p) => {
-          let obj = { prod: p.produit, usd: p.usd, cdf: p.cdf };
-          return obj;
-        });
-        setIbiciro(__pri);
-      })
-      .catch((err) => console.log(err));
-  }, []);
   return (
     <ScrollView
       className="bg-white flex-1"
-      contentContainerStyle={{ paddingBottom: 80, paddingHorizontal: "5%" }}
+      contentContainerStyle={{ paddingBottom: 120, paddingHorizontal: "5%" }}
     >
       <StatusBar
         barStyle="dark-content"
@@ -111,7 +90,7 @@ const Gros = () => {
           <DataTable.Title>USD</DataTable.Title>
           <DataTable.Title numeric>CDF</DataTable.Title>
         </DataTable.Header>
-        {ibiciro.map((d, index) => {
+        {prices.map((d, index) => {
           return (
             <DataTable.Row key={index}>
               <DataTable.Cell>{d.prod}</DataTable.Cell>
@@ -219,6 +198,25 @@ const Gros = () => {
           ]}
         />
       </View>
+      <View
+        className="rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 50,
+          marginLeft: "4%",
+          marginRight: "4%",
+          marginTop: "4%",
+        }}
+      >
+        <RNPickerSelect
+          placeholder={{
+            label: "Mode de paiement",
+            value: null,
+          }}
+          onValueChange={(value) => setMode(value)}
+          items={modes}
+        />
+      </View>
       <TextInput
         className=" rounded"
         style={{
@@ -287,5 +285,3 @@ const Gros = () => {
 };
 
 export default Gros;
-
-const styles = StyleSheet.create({});
