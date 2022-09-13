@@ -1,32 +1,33 @@
 import {
-  StyleSheet,
   Text,
   View,
   StatusBar,
   TextInput,
   TouchableOpacity,
+  ScrollView,
+  Alert,
 } from "react-native";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fonts } from "../utils/fonts";
-import BackButton from "../navigation/BackButton";
 import RNPickerSelect from "react-native-picker-select/src";
 import { DataTable } from "react-native-paper";
-import { saveRetail, getproducts, getPrice } from "../functions/requests";
+import { saveRetail } from "../functions/requests";
 import { useSelector } from "react-redux";
 
-const Detail = () => {
-  const [hey, setHey] = useState("hello");
+const Detail = ({ navigation }) => {
   const [plaque, setPlaque] = useState("");
   const [price, setPrice] = useState("");
-  const [products, setProducts] = useState([]);
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState("");
   const [usd, setUsd] = useState(0);
   const [fc, setFc] = useState(0);
-  const [ibiciro, setIbiciro] = useState([]);
+  const [devise, setDevise] = useState("USD");
+  const [mode, setMode] = useState([]);
 
-  const { token, user } = useSelector((state) => state.app);
+  const { token, user, prices, products, modes } = useSelector(
+    (state) => state.app
+  );
 
   const enregistrer = () => {
     let data = {
@@ -38,7 +39,9 @@ const Detail = () => {
       currency: devise,
       usd,
       cdf: "0",
+      payment_mode: mode,
     };
+    console.log(token);
     if (plaque == "" || quantity == "" || price == "") {
       Alert.alert(
         "Station",
@@ -55,7 +58,7 @@ const Detail = () => {
         .then((res) => {
           Alert.alert(
             "Station",
-            "Detail saved!",
+            "Enregistré!",
             [
               {
                 text: "OK",
@@ -69,46 +72,24 @@ const Detail = () => {
     }
   };
 
-  useEffect(() => {
-    getproducts(token)
-      .then((res) => {
-        let __prod = res.map((p) => {
-          let obj = { label: p.nom, value: p.id };
-          return obj;
-        });
-        setProducts(__prod);
-      })
-      .catch((err) => console.log(err));
-
-    getPrice(token)
-      .then((res) => {
-       
-        let __pri = res.map((p) => {
-          let obj = { prod: p.produit, usd: p.usd, cdf: p.cdf };
-          return obj;
-        });
-        setIbiciro(__pri);
-      })
-      .catch((err) => console.log(err));
-  }, []);
   return (
-    <View
-      className="bg-white flex-1 "
-      style={{ paddingHorizontal: "5%", flex: 1 }}
+    <ScrollView
+      className="bg-white flex-1"
+      contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: "5%" }}
     >
       <StatusBar
         barStyle="dark-content"
         backgroundColor="white"
         translucent={false}
       />
-    
+
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>Produit</DataTable.Title>
           <DataTable.Title>USD</DataTable.Title>
           <DataTable.Title numeric>CDF</DataTable.Title>
         </DataTable.Header>
-        {ibiciro.map((d, index) => {
+        {prices.map((d, index) => {
           return (
             <DataTable.Row key={index}>
               <DataTable.Cell>{d.prod}</DataTable.Cell>
@@ -118,11 +99,30 @@ const Detail = () => {
           );
         })}
       </DataTable>
+      <View
+        className="rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 50,
+          marginLeft: "4%",
+          marginRight: "4%",
+          marginTop: "4%",
+        }}
+      >
+        <RNPickerSelect
+          placeholder={{
+            label: "Product",
+            value: null,
+          }}
+          onValueChange={(value) => setProduct(value)}
+          items={products}
+        />
+      </View>
       <TextInput
         className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
-          height: "7%",
+          height: 45,
           marginLeft: "4%",
           marginRight: "4%",
           padding: "2%",
@@ -136,7 +136,7 @@ const Detail = () => {
         className="  rounded"
         style={{
           backgroundColor: "#F5F6F9",
-          height: "7%",
+          height: 45,
           marginLeft: "4%",
           marginRight: "4%",
           padding: "2%",
@@ -147,11 +147,55 @@ const Detail = () => {
         placeholder="Prix"
         keyboardType="numeric"
       />
+
+      <View
+        className="rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 50,
+          marginLeft: "4%",
+          marginRight: "4%",
+          marginTop: "4%",
+        }}
+      >
+        <RNPickerSelect
+          placeholder={{
+            label: "Devise",
+            value: null,
+          }}
+          onValueChange={(value) => setDevise(value)}
+          items={[
+            { label: "USD", value: "USD" },
+            { label: "FC", value: "FC" },
+          ]}
+        />
+      </View>
+
+      <View
+        className="rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 50,
+          marginLeft: "4%",
+          marginRight: "4%",
+          marginTop: "4%",
+        }}
+      >
+        <RNPickerSelect
+          placeholder={{
+            label: "Mode de paiement",
+            value: null,
+          }}
+          onValueChange={(value) => setMode(value)}
+          items={modes}
+        />
+      </View>
+
       <TextInput
         className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
-          height: "7%",
+          height: 45,
           marginLeft: "4%",
           marginRight: "4%",
           padding: "2%",
@@ -166,7 +210,7 @@ const Detail = () => {
         className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
-          height: "7%",
+          height: 45,
           marginLeft: "4%",
           marginRight: "4%",
           padding: "2%",
@@ -181,7 +225,7 @@ const Detail = () => {
         className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
-          height: "7%",
+          height: 45,
           marginLeft: "4%",
           marginRight: "4%",
           padding: "2%",
@@ -197,7 +241,7 @@ const Detail = () => {
         onPress={enregistrer}
         className=" rounded flex-row justify-center items-center "
         style={{
-          height: "6%",
+          height: 45,
           marginLeft: "4%",
           marginRight: "4%",
           padding: "0%",
@@ -210,10 +254,8 @@ const Detail = () => {
           Enregistrer
         </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
 export default Detail;
-
-const styles = StyleSheet.create({});
