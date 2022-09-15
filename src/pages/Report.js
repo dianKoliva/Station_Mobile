@@ -14,12 +14,7 @@ const Report = () => {
    const [start,setStart]=useState("");
    const [end,setEnd]=useState("")
 
-    useEffect(() => {
-       
-   
-        
-    }, []);
-
+ 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [second,setSecond]=useState(false);
 
