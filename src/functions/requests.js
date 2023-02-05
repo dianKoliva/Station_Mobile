@@ -1,19 +1,18 @@
 import axios from "axios";
-exports.getproducts = async (token) => {
+export const getproducts = async (token) => {
   const response = await axios.get(
     `http://63.142.252.251//petrol-station/web/index.php/api/v1/transactions/products?access-token=${token}`
   );
   return response.data;
 };
-exports.getPrice = async (token) => {
+export const getPrice = async (token) => {
   const response = await axios.get(
     `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/pricing?access-token=${token}`
   );
   return response.data;
 };
 
-exports.getReports = async (token, start, ending) => {
-
+export const getReports = async (token, start, ending) => {
   const response = await axios.post(
     `http://63.142.252.251/petrol-station/web/index.php/api/v1/transactions/report?access-token=${token}`,
     {

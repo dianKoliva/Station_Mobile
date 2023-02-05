@@ -7,12 +7,12 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { fonts } from "../utils/fonts";
 import RNPickerSelect from "react-native-picker-select/src";
 import { DataTable } from "react-native-paper";
-import { saveRetail } from "../functions/requests";
+import { saveRetail, getPrice, getproducts } from "../functions/requests";
 import { useSelector } from "react-redux";
 
 const Detail = ({ navigation }) => {
@@ -72,6 +72,26 @@ const Detail = ({ navigation }) => {
     }
   };
 
+  const calcPrice = (prod) => {
+    setDevise(prod);
+    let f_prod = products.find((y) => y.value === product);
+    if (f_prod) {
+      let prix = prices.find((x) => x.prod === f_prod.label);
+      if (prix) {
+        prix =
+          prod === "USD"
+            ? parseFloat(prix.usd) * quantity
+            : prod === "FC"
+            ? parseFloat(prix.cdf) * quantity
+            : null;
+        setPrice(prix);
+      }
+    }
+  };
+
+  useEffect(() => {
+    console.log(prices);
+  }, []);
   return (
     <ScrollView
       className="bg-white flex-1"
@@ -132,8 +152,9 @@ const Detail = ({ navigation }) => {
         onChangeText={(text) => setPlaque(text)}
         placeholder="Plaque"
       />
+
       <TextInput
-        className="  rounded"
+        className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
           height: 45,
@@ -142,9 +163,9 @@ const Detail = ({ navigation }) => {
           padding: "2%",
           marginTop: "4%",
         }}
-        value={price}
-        onChangeText={(text) => setPrice(text)}
-        placeholder="Prix"
+        value={quantity}
+        onChangeText={(text) => setQuantity(text)}
+        placeholder="Quantité"
         keyboardType="numeric"
       />
 
@@ -163,12 +184,53 @@ const Detail = ({ navigation }) => {
             label: "Devise",
             value: null,
           }}
-          onValueChange={(value) => setDevise(value)}
+          onValueChange={(value) => calcPrice(value)}
           items={[
             { label: "USD", value: "USD" },
             { label: "FC", value: "FC" },
           ]}
         />
+      </View>
+
+      {/* <TextInput
+        className="  rounded"
+        style={{
+          backgroundColor: "#F5F6F9",
+          height: 45,
+          marginLeft: "4%",
+          marginRight: "4%",
+          padding: "2%",
+          marginTop: "4%",
+        }}
+        value={price}
+        onChangeText={(text) => setPrice(text)}
+        placeholder="Prix"
+        keyboardType="numeric"
+        
+      /> */}
+
+      <View
+        className="flex-row"
+        style={{
+          height: 45,
+          marginLeft: "3%",
+          marginRight: "3%",
+          padding: "2%",
+          marginTop: "1%",
+        }}
+      >
+        <Text
+          className="font-bold text-base"
+          style={[{ color: "#2941CA" }, fonts.dmSansMedium]}
+        >
+          Prix:{" "}
+        </Text>
+        <Text
+          className="text-base"
+          style={[{ color: "#2941CA" }, fonts.dmSansMedium]}
+        >
+          {price}
+        </Text>
       </View>
 
       <View
@@ -178,7 +240,6 @@ const Detail = ({ navigation }) => {
           height: 50,
           marginLeft: "4%",
           marginRight: "4%",
-          marginTop: "4%",
         }}
       >
         <RNPickerSelect
@@ -191,21 +252,6 @@ const Detail = ({ navigation }) => {
         />
       </View>
 
-      <TextInput
-        className=" rounded"
-        style={{
-          backgroundColor: "#F5F6F9",
-          height: 45,
-          marginLeft: "4%",
-          marginRight: "4%",
-          padding: "2%",
-          marginTop: "4%",
-        }}
-        value={quantity}
-        onChangeText={(text) => setQuantity(text)}
-        placeholder="Quantité"
-        keyboardType="numeric"
-      />
       <TextInput
         className=" rounded"
         style={{

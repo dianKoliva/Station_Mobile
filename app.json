@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Station_Mobile",
-    "slug": "Station_Mobile",
+    "name": "Petrol Station",
+    "slug": "Petrol_Station",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.azdevs.petrolstation"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8de44a12-45a7-4560-9123-afae10829f3e"
+      }
     }
   }
 }
