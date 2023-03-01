@@ -41,7 +41,6 @@ const Detail = ({ navigation }) => {
       cdf: "0",
       payment_mode: mode,
     };
-    console.log(token);
     if (plaque == "" || quantity == "" || price == "") {
       Alert.alert(
         "Station",
@@ -89,9 +88,6 @@ const Detail = ({ navigation }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(prices);
-  }, []);
   return (
     <ScrollView
       className="bg-white flex-1"

@@ -73,6 +73,23 @@ const Gros = ({ navigation }) => {
     }
   };
 
+  const calcPrice = (prod) => {
+    setDevise(prod);
+    let f_prod = products.find((y) => y.value === product);
+    if (f_prod) {
+      let prix = prices.find((x) => x.prod === f_prod.label);
+      if (prix) {
+        prix =
+          prod === "USD"
+            ? parseFloat(prix.usd) * quantity
+            : prod === "FC"
+            ? parseFloat(prix.cdf) * quantity
+            : null;
+        setPrice(prix);
+      }
+    }
+  };
+
   return (
     <ScrollView
       className="bg-white flex-1"
@@ -162,7 +179,7 @@ const Gros = ({ navigation }) => {
         placeholder="Plaque"
       />
       <TextInput
-        className="  rounded"
+        className=" rounded"
         style={{
           backgroundColor: "#F5F6F9",
           height: "7%",
@@ -171,9 +188,9 @@ const Gros = ({ navigation }) => {
           padding: "2%",
           marginTop: "4%",
         }}
-        value={price}
-        onChangeText={(text) => setPrice(text)}
-        placeholder="Prix"
+        value={quantity}
+        onChangeText={(text) => setQuantity(text)}
+        placeholder="Quantité"
         keyboardType="numeric"
       />
       <View
@@ -191,12 +208,35 @@ const Gros = ({ navigation }) => {
             label: "Devise",
             value: null,
           }}
-          onValueChange={(value) => setDevise(value)}
+          onValueChange={(value) => calcPrice(value)}
           items={[
             { label: "USD", value: "USD" },
             { label: "FC", value: "FC" },
           ]}
         />
+      </View>
+      <View
+        className="flex-row"
+        style={{
+          height: 45,
+          marginLeft: "3%",
+          marginRight: "3%",
+          padding: "2%",
+          marginTop: "1%",
+        }}
+      >
+        <Text
+          className="font-bold text-base"
+          style={[{ color: "#2941CA" }, fonts.dmSansMedium]}
+        >
+          Prix:{" "}
+        </Text>
+        <Text
+          className="text-base"
+          style={[{ color: "#2941CA" }, fonts.dmSansMedium]}
+        >
+          {price}
+        </Text>
       </View>
       <View
         className="rounded"
@@ -217,21 +257,7 @@ const Gros = ({ navigation }) => {
           items={modes}
         />
       </View>
-      <TextInput
-        className=" rounded"
-        style={{
-          backgroundColor: "#F5F6F9",
-          height: "7%",
-          marginLeft: "4%",
-          marginRight: "4%",
-          padding: "2%",
-          marginTop: "4%",
-        }}
-        value={quantity}
-        onChangeText={(text) => setQuantity(text)}
-        placeholder="Quantité"
-        keyboardType="numeric"
-      />
+
       <TextInput
         className=" rounded"
         style={{
